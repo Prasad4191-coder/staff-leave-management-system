@@ -11,7 +11,7 @@ import { DashService } from './service/dash.service';
 })
 export class DashboardComponent implements OnInit {
   leaveForm: FormGroup | any;
-  getHOD = false;
+  getHod = false;
   getStaff = false;
   flagForButton = false;
   displayModal: boolean = false;
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     }, 1000)
     this.user = this.dashServ.sendData()
     if (this.user == 'HOD') {
-      this.getHOD = !this.getHOD
+      this.getHod = !this.getHod
     } else {
       this.staffData = this.user
       this.getStaff = true
