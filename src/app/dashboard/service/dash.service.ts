@@ -12,13 +12,13 @@ export class DashService {
   sendData() {
     return this.authServ.dataForUser()
   }
+   dataForStaff() {
+    return this.http.get(this.fbDblinkLeave)
+  }
   postDataToDb(data: any) {
     return this.http.post(this.fbDblinkLeave, data)
   }
   leaveData() {
-    return this.http.get(this.fbDblinkLeave)
-  }
-  dataForStaff() {
     return this.http.get(this.fbDblinkLeave)
   }
   updateStatusInDb(id: any, value: any) {
