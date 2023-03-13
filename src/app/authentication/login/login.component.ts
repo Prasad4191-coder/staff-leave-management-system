@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.authServ.login().subscribe((data: any) => {
       for (const element of data) {
         if ((element.userName == this.loginForm.value.userName) && (element.password == this.loginForm.value.password)) {
-          if (element.role == "HOD") {
+          if (element.role == "Hod") {
             this.userLog = element.role
             this.authServ.userCheck(element.role)
             this.router.navigate(['dashboard'],)
