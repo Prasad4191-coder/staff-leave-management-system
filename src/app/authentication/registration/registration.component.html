@@ -1,0 +1,106 @@
+<div class="grid">
+    <div class="col-5 mx-auto mt-6">
+        <form [formGroup]="registrationForm" (ngSubmit)="registerUser()"
+            class="p-fluid border border-50 p-3 border-round-lg shadow-6">
+            <h2 class="text-center">Registration</h2>
+            <div class="formgrid grid">
+                <div class="field col">
+                    <div class="p-field-radiobutton">
+                        <p-radioButton name="role" label="HOD" value="HOD" formControlName="role"
+                            class="pr-3"></p-radioButton>
+                        <p-radioButton name="role" label="Staff" value="Staff" formControlName="role"></p-radioButton>
+                    </div>
+                </div>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col">
+                    <span class="p-float-label">
+                        <input id="firstname" type="text" pInputText formControlName="firstName">
+                        <label for="firstname">First Name</label>
+                    </span>
+                    <div *ngIf="registrationForm.get('firstName')!.errors && registrationForm.get('firstName')!.touched"
+                        class="p-error">
+                        <small *ngIf="registrationForm.get('firstName')!.hasError('required')">First Name is
+                            required</small>
+                    </div>
+                </div>
+                <div class="field col">
+                    <span class="p-float-label">
+                        <input id="lastname" type="text" formControlName="lastName" pInputText>
+                        <label for="lastname">Last Name</label>
+                    </span>
+                    <div *ngIf="registrationForm.get('lastName')!.errors && registrationForm.get('lastName')!.touched"
+                        class="p-error">
+                        <small *ngIf="registrationForm.get('lastName')!.hasError('required')">Last Name is
+                            required</small>
+                    </div>
+                </div>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col">
+                    <span class="p-float-label">
+                        <input id="email" type="email" formControlName="email" pInputText>
+                        <label for="email">Email</label>
+                    </span>
+                    <div *ngIf="registrationForm.get('email')!.errors && registrationForm.get('email')!.touched"
+                        class="p-error">
+                        <small *ngIf="registrationForm.get('email')!.hasError('required')">Email is
+                            required</small>
+                    </div>
+                </div>
+                <div class="field col">
+                    <span class="p-float-label">
+                        <input id="contact" type="text" formControlName="contact" pInputText>
+                        <label for="contact">Contact</label>
+                    </span>
+                    <div *ngIf="registrationForm.get('contact')!.errors && registrationForm.get('contact')!.touched"
+                        class="p-error">
+                        <small *ngIf="registrationForm.get('contact')!.hasError('required')">Contact is
+                            required</small>
+                    </div>
+                </div>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col">
+                    <span class="p-float-label">
+                        <p-dropdown id="department" [autoDisplayFirst]="false" [options]="departments"
+                            formControlName="dept"></p-dropdown>
+                        <label for="depart">Department</label>
+                    </span>
+                    <div *ngIf="registrationForm.get('dept')!.errors && registrationForm.get('dept')!.touched"
+                        class="p-error">
+                        <small *ngIf="registrationForm.get('dept')!.hasError('required')">Department is
+                            required</small>
+                    </div>
+                </div>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col">
+                    <span class="p-float-label">
+                        <input id="userName" type="text" pInputText formControlName="userName">
+                        <label for="userName">Username</label>
+                    </span>
+                    <div *ngIf="registrationForm.get('userName')!.errors && registrationForm.get('userName')!.touched"
+                        class="p-error">
+                        <small *ngIf="registrationForm.get('userName')!.hasError('required')">Username is
+                            required</small>
+                    </div>
+                </div>
+                <div class="field col">
+                    <span class="p-float-label">
+                        <input id="userPsw" type="password" pInputText formControlName="password">
+                        <label for="userPsw">Password</label>
+                    </span>
+                    <div *ngIf="registrationForm.get('password')!.errors && registrationForm.get('password')!.touched"
+                        class="p-error">
+                        <small *ngIf="registrationForm.get('password')!.hasError('required')">Password is
+                            required</small>
+                    </div>
+                </div>
+            </div>
+            <button pButton type="submit" label="Register"></button>
+            <div class="register-link text-center mt-2">
+                Already registerd <a routerLink="/login">Login</a>
+            </div>
+        </form>
+    </div>

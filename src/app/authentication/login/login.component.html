@@ -1,0 +1,32 @@
+<div class="grid mt-6">
+    <div class="col-3 mx-auto mt-5 border border-50 p-3 border-round-lg shadow-6">
+        <h2 class="text-center">Login</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="loginUser()" class="p-fluid my-4">
+            <div class="p-field form-group p-2  my-2">
+                <span class="p-float-label">
+                    <input id="username" type="text" pInputText formControlName="userName">
+                    <label for="username">Username</label>
+                </span>
+                <div *ngIf="loginForm.get('userName')!.errors && loginForm.get('userName')!.touched" class="p-error">
+                    <small *ngIf="loginForm.get('userName')!.hasError('required')">Username is required.</small>
+                </div>
+            </div>
+            <div class="p-field form-group p-2  my-2">
+                <span class="p-float-label">
+                    <input id="password" type="password" pPasswordToggle pInputText formControlName="password">
+                    <label for="password">Password</label>
+                </span>
+                <div *ngIf="loginForm.get('password')!.errors && loginForm.get('password')!.touched" class="p-error">
+                    <small *ngIf="loginForm.get('password')!.hasError('required')">Password is required.</small>
+                </div>
+            </div>
+
+            <div class="p-field">
+                <button pButton type="submit" label="Login"></button>
+            </div>
+            <div class="p-field text-center mt-2">
+                Not Registered Yet? <a routerLink="/register">Register</a>
+            </div>
+        </form>
+    </div>
+</div>
