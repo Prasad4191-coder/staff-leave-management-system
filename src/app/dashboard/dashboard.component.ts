@@ -27,7 +27,6 @@ export class DashboardComponent implements OnInit {
   rejectLeave: any = 0;
   pendingLeave: any = 0;
   constructor(private dashServ: DashService, private fb: FormBuilder, private router: Router) { }
-
   ngOnInit(): void {
     this.leaveForm = this.fb.group({
       from: this.fb.control('', Validators.required),
@@ -40,7 +39,6 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       this.leavesDay()
     }, 1000)
-
     this.user = this.dashServ.sendData()
     if (this.user == 'HOD') {
       this.getHOD = !this.getHOD
@@ -48,8 +46,8 @@ export class DashboardComponent implements OnInit {
       this.staffData = this.user
       this.getStaff = true
     }
-    this.DataForStaff()
     this.hodData()
+    this.DataForStaff()
   }
   showModalDialog() {
     this.displayModal = true;
@@ -91,22 +89,6 @@ export class DashboardComponent implements OnInit {
       }
     }
   }
-  submit() {
-    const from = new Date(this.leaveForm.value.from);
-    const to = new Date(this.leaveForm.value.to);
-    const time = to.getTime() - from.getTime();
-    const day = time / (1000 * 3600 * 24);
-    this.leaveForm.value.numOfDay = day
-    this.satffDataAll = {
-      ...this.leaveForm.value,
-      ...this.staffData
-    }
-    this.satffData.push(this.satffDataAll)
-    this.dashServ.postDataToDb(this.satffDataAll).subscribe((data: any) => {
-    })
-    this.displayModal = false;
-    this.leaveForm.reset()
-  }
   leaveStatus(card: any, status: any) {
     const id = card.id
     const val = {
@@ -128,6 +110,22 @@ export class DashboardComponent implements OnInit {
       card.flag = false
       card.leaveStatus = 'Rejected'
     }
+  }
+   submit() {
+    const from = new Date(this.leaveForm.value.from);
+    const to = new Date(this.leaveForm.value.to);
+    const time = to.getTime() - from.getTime();
+    const day = time / (1000 * 3600 * 24);
+    this.leaveForm.value.numOfDay = day
+    this.satffDataAll = {
+      ...this.leaveForm.value,
+      ...this.staffData
+    }
+    this.satffData.push(this.satffDataAll)
+    this.dashServ.postDataToDb(this.satffDataAll).subscribe((data: any) => {
+    })
+    this.displayModal = false;
+    this.leaveForm.reset()
   }
   logout() {
     this.router.navigate(['/login'])
