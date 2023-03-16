@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   rejectLeave: any = 0;
   pendingLeave: any = 0;
   constructor(private dashServ: DashService, private fb: FormBuilder, private router: Router) { }
+
   ngOnInit(): void {
     this.leaveForm = this.fb.group({
       from: this.fb.control('', Validators.required),
@@ -36,15 +37,16 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       this.leavesDay()
     }, 1000)
+
     this.user = this.dashServ.sendData()
-    if (this.user == 'Hod') {
-      this.getHod = !this.getHod
+    if (this.user.role == 'Hod') {
+      this.getHod = true
     } else {
       this.staffData = this.user
       this.getStaff = true
     }
-    this.hodData()
     this.DataForStaff()
+    this.hodData()
   }
   showModalDialog() {
     this.displayModal = true;
@@ -86,22 +88,7 @@ export class DashboardComponent implements OnInit {
       }
     }
   }
-  leaveStatus(card: any, status: any) {
-    const id = card.id
-    const val = {
-      leaveStatus: status
-    }
-    this.dashServ.updateStatusInDb(id, val)
-    setTimeout(() => {
-      this.hodData()
-    }, 1000)
-    if (status == 'Approved') {
-      card.leaveStatus = 'Approved'
-    } else {
-      card.leaveStatus = 'Rejected'
-    }
-  }
-   submit() {
+  submit() {
     const from = new Date(this.leaveForm.value.from);
     const to = new Date(this.leaveForm.value.to);
     const time = to.getTime() - from.getTime();
@@ -112,9 +99,26 @@ export class DashboardComponent implements OnInit {
       ...this.staffData
     }
     this.satffData.push(this.satffDataAll)
-    this.dashServ.postDataToDb(this.satffDataAll)
+    this.dashServ.postDataToDb(this.satffDataAll).subscribe((data: any) => {
+    })
     this.displayModal = false;
     this.leaveForm.reset()
+  }
+  leaveStatus(card: any, status: any) {
+    const id = card.id
+    const val = {
+      leaveStatus: status
+    }
+    this.dashServ.updateStatusInDb(id, val).subscribe((val: any) => {
+    })
+    setTimeout(() => {
+      this.hodData()
+    }, 1000)
+    if (status == 'Approved') {
+      card.leaveStatus = 'Approved'
+    } else {
+      card.leaveStatus = 'Rejected'
+    }
   }
   logout() {
     this.router.navigate(['/login'])
