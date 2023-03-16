@@ -32,7 +32,7 @@ export class RegistrationComponent implements OnInit {
   registerUser() {
     this.authServ.signUp(this.registrationForm.value).subscribe((data: any) => {
     })
+    console.log(this.registrationForm.value)
     this.registrationForm.reset()
-
   }
 }
