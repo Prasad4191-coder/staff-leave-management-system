@@ -10,7 +10,7 @@ import { AuthService } from '../service/auth.service';
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup | any;
-  userLog: any;
+  userInfo: any;
   constructor(private fb: FormBuilder, private authServ: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,11 +24,11 @@ export class LoginComponent implements OnInit {
       for (const element of data) {
         if ((element.userName == this.loginForm.value.userName) && (element.password == this.loginForm.value.password)) {
           if (element.role == "Hod") {
-            this.userLog = element.role
+            this.userInfo = element.role
             this.authServ.userCheck(element.role)
             this.router.navigate(['dashboard'],)
           } else if (element.role == "Staff") {
-            this.userLog = element
+            this.userInfo = element
             this.authServ.userCheck(element)
             this.router.navigate(['dashboard'])
           }
