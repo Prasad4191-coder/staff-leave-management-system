@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
       for (const element of data) {
         if ((element.userName == this.loginForm.value.userName) && (element.password == this.loginForm.value.password)) {
           if (element.role == "Hod") {
-            this.userInfo = element.role
-            this.authServ.userCheck(element.role)
+            this.userInfo = element
+            this.authServ.userCheck(element)
             this.router.navigate(['dashboard'],)
           } else if (element.role == "Staff") {
             this.userInfo = element
@@ -38,5 +38,4 @@ export class LoginComponent implements OnInit {
       }
     })
   }
-
 }
