@@ -13,14 +13,12 @@ export class DashboardComponent implements OnInit {
   leaveForm: FormGroup | any;
   getHod = false;
   getStaff = false;
-  flagForButton = false;
   displayModal: boolean = false;
   satffDataAll: any;
   staffData: any;
   dataForHod: any;
   user: any;
   totleLeave: any;
-  flag: any;
   satffData: any = [];
   approvedLeave: any = 0;
   buttonId: any;
@@ -34,7 +32,6 @@ export class DashboardComponent implements OnInit {
       reason: this.fb.control('', Validators.required),
       numOfDay: this.fb.control('1'),
       leaveStatus: this.fb.control('Pending'),
-      flag: this.fb.control(true)
     })
     setTimeout(() => {
       this.leavesDay()
@@ -94,20 +91,14 @@ export class DashboardComponent implements OnInit {
     const val = {
       leaveStatus: status
     }
-    this.dashServ.updateStatusInDb(id, val).subscribe((val: any) => {
-    })
+    this.dashServ.updateStatusInDb(id, val)
     setTimeout(() => {
       this.hodData()
     }, 1000)
     if (status == 'Approved') {
-      this.flag = 'Approved'
-      this.flagForButton = true
-      card.flag = false
       card.leaveStatus = 'Approved'
     } else {
       this.flag = 'Rejected'
-      this.flagForButton = true
-      card.flag = false
       card.leaveStatus = 'Rejected'
     }
   }
@@ -122,8 +113,7 @@ export class DashboardComponent implements OnInit {
       ...this.staffData
     }
     this.satffData.push(this.satffDataAll)
-    this.dashServ.postDataToDb(this.satffDataAll).subscribe((data: any) => {
-    })
+    this.dashServ.postDataToDb(this.satffDataAll)
     this.displayModal = false;
     this.leaveForm.reset()
   }
