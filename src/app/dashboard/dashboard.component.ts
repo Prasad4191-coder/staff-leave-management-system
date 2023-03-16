@@ -98,7 +98,6 @@ export class DashboardComponent implements OnInit {
     if (status == 'Approved') {
       card.leaveStatus = 'Approved'
     } else {
-      this.flag = 'Rejected'
       card.leaveStatus = 'Rejected'
     }
   }
