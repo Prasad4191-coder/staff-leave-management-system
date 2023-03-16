@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
       this.leavesDay()
     }, 1000)
     this.user = this.dashServ.sendData()
-    if (this.user == 'HOD') {
+    if (this.user == 'Hod') {
       this.getHod = !this.getHod
     } else {
       this.staffData = this.user
